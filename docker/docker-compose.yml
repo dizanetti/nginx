@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  nginx-lb:
+    build: 
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    ports: 
+      - 8000:8000
+    depends_on:
+      - ms-partner
+      - ms-customer
+  
+  ms-partner:
+    build:
+      context: .
+      dockerfile: ./ms-partner/Dockerfile
+    ports:
+      - "8082:8082"
+  
+  ms-customer:
+    build:
+      context: .
+      dockerfile: ./ms-customer/Dockerfile
+    ports:
+      - "8081:8081"
